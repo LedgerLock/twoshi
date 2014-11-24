@@ -21,3 +21,13 @@ Based on this [blog post](http://geraldkaszuba.com/creating-your-own-experimenta
 * in the **other node** type `rt addnode 172.17.0.3 onetry`
 * The two nodes should now be in sync
 
+* clone this repo
+* `cd` into the root directory
+* `make build_toshi`
+* `make build_bitcoind`
+* `sudo docker images` should list 
+```
+REPOSITORY                     TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+assafshomer/toshi-regtest      latest              ------------        ------------        667.7 MB
+assafshomer/bitcoind-regtest   latest              ------------        ------------        244.3 MB
+```

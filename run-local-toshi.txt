@@ -1,7 +1,16 @@
-﻿Following these instructions: 
+Following these instructions: 
+
 
 On my local machine cmd prompt
 ==============================
+
+build bitcoind image
+--------------------
+make build_bitcoind
+
+build toshi image
+-----------------
+make build_toshi
 
 cleanup (unless you have other docker images you don't want to kill):
 ---------------------------------------------------------------------
