@@ -1,9 +1,9 @@
 # Local bitcoin network with bitcoind docker images 
 Based on this [blog post](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
 
-* `alice_shell`, or `bob_shell` to get a bash console of the local nodes
-* `rt -daemon -printtoconsole` to get each node running
-* you can skip this by running `alice_daemon` or `bob_daemon` from the start
+* `make alice_shell`, or `make bob_shell` to get a bash console of the local nodes
+* the docker images come equipped with the alias `rt` for `bitcoind -regtest`
+* `rt -daemon -printtoconsole` to get each node running* 
 * `ip addr` to find the ip address of each node, it should look something like this
 ```
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
@@ -18,5 +18,6 @@ Based on this [blog post](http://geraldkaszuba.com/creating-your-own-experimenta
        valid_lft forever preferred_lft forever
 ```
 
-* in the **other node** type `rt addnode 172.17.0.3 onetry`, and vice versa
+* in the **other node** type `rt addnode 172.17.0.3 onetry`
+* The two nodes should now be in sync
 
