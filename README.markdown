@@ -13,7 +13,10 @@ Based on this [blog post](http://geraldkaszuba.com/creating-your-own-experimenta
        valid_lft forever preferred_lft forever
 6: eth0: <BROADCAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
     link/ether 02:42:ac:11:00:03 brd ff:ff:ff:ff:ff:ff
-    inet``` **172.17.0.3/16** ```scope global eth0
+    inet 172.17.0.3/16 scope global eth0
     inet6 fe80::42:acff:fe11:3/64 scope link 
        valid_lft forever preferred_lft forever
 ```
+
+* in the **other node** type `rt addnode 172.17.0.3 oetry`, and vice versa
+
