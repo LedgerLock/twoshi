@@ -18,5 +18,5 @@ Based on this [blog post](http://geraldkaszuba.com/creating-your-own-experimenta
        valid_lft forever preferred_lft forever
 ```
 
-* in the **other node** type `rt addnode 172.17.0.3 oetry`, and vice versa
+* in the **other node** type `rt addnode 172.17.0.3 onetry`, and vice versa
 
