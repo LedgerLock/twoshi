@@ -13,16 +13,16 @@ Based on
 	git submodule update	
 ```
 - cd back into this repo and build the toshi and bitcoind images
-```
+```Batchfile
 	cd regtest-docker
 	make build_regtest_images
 ```
 - launch the toshi container 
-```
+```Batchfile
 	make toshi
 ```
 - paste this code into the CMD prompt of the toshi container
-```
+```Batchfile
 	export DATABASE_URL=postgres://postgres:@$DB_PORT_5432_TCP_ADDR:$DB_PORT_5432_TCP_PORT
 	export REDIS_URL=redis://$REDIS_PORT_6379_TCP_ADDR:$REDIS_PORT_6379_TCP_PORT
 	export TOSHI_ENV=test
@@ -34,11 +34,11 @@ Based on
 ```
 - launch a web broswer and visit localhost:5000, you should see the toshi regtest client
 - from a new terminal window on your machine launch the bitcoind container
-```
+```Batchfile
 	make bitcoind
 ```
 - paste this code into the CMD prompt of the bitcoind container, this will launch the bitcoind node,  connect the two peers, and mine 101 blocks
-```
+```Batchfile
 	./launch.sh 
 ```
 - visit localhost:5000, you should see the new 101 blocks in the toshi client
