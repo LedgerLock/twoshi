@@ -1,33 +1,5 @@
-# Local bitcoin network with bitcoind docker images 
-Based on this [blog post](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
-
-* `make alice_shell`, or `make bob_shell` to get a bash console of the local nodes
-* the docker images come equipped with the alias `rt` for `bitcoind -regtest`
-* `rt -daemon -printtoconsole` to get each node running* 
-* `ip addr` to find the ip address of each node, it should look something like this
-```
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-    inet6 ::1/128 scope host 
-       valid_lft forever preferred_lft forever
-6: eth0: <BROADCAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
-    link/ether 02:42:ac:11:00:03 brd ff:ff:ff:ff:ff:ff
-    inet 172.17.0.3/16 scope global eth0
-    inet6 fe80::42:acff:fe11:3/64 scope link 
-       valid_lft forever preferred_lft forever
-```
-
-* in the **other node** type `rt addnode 172.17.0.3 onetry`
-* The two nodes should now be in sync
-
-* clone this repo
-* `cd` into the root directory
-* `make build_toshi`
-* `make build_bitcoind`
-* `sudo docker images` should list 
-```
-REPOSITORY                     TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-assafshomer/toshi-regtest      latest              ------------        ------------        667.7 MB
-assafshomer/bitcoind-regtest   latest              ------------        ------------        244.3 MB
-```
+# Local bitcoin network 
+## with one [bitcoind](https://en.bitcoin.it/wiki/Bitcoind) node and one [toshi](https://toshi.io) node
+Based on 
+- [toshi docker image](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
+- [creating-your-own-experimental-bitcoin-network](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
