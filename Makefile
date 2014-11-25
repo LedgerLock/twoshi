@@ -69,3 +69,4 @@ toshi: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
 bitcoind: rm_bitcoind
 	$(DOCKER_BITCOIND) -i $(BITCOIND_IMG)
 
+build_regtest_images: build_toshi build_bitcoind
