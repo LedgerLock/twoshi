@@ -44,5 +44,6 @@ Based on
 
 ### TODO
 - automate the "paste into CMD" parts
-- daemonize them
+- include toshi as a git submodule instead of manually cloaning it along side this repo
+- daemonize both containers
 - connect to both with RPC
