@@ -7,10 +7,10 @@ Based on
 ### to run the network
 - clone this repo, and init the toshi submodule which is on the docker branch until such time that my [pull request](https://github.com/coinbase/toshi/pull/131) is merged into coinbase/toshi
 ```
- 	git clone git@github.com:assafshomer/regtest-docker.git 	
+	git clone git@github.com:assafshomer/regtest-docker.git 	
 	cd regtest-docker
-  git submodule init
-  git submodule update	
+	git submodule init
+	git submodule update	
 ```
 - cd back into this repo and build the toshi and bitcoind images
 ```
