@@ -1,7 +1,7 @@
 # Local bitcoin network 
 ## with one [bitcoind](https://en.bitcoin.it/wiki/Bitcoind) node and one [toshi](https://toshi.io) node
 Based on 
-- [toshi docker image](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
+- [toshi docker image](http://www.soroushjp.com/2014/10/15/deploying-your-own-toshi-api-bitcoin-node-using-coreos-docker-aws/)
 - [creating-your-own-experimental-bitcoin-network](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
 
 ### to run the network
