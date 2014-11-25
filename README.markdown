@@ -32,4 +32,17 @@ Based on
 	foreman start -c web=1,block_worker=1,transaction_worker=1,peer_manager=1
 ```
 - launch a web broswer and visit localhost:5000, you should see the toshi regtest client
+- from a new terminal window on your machine launch the bitcoind container
+```
+	make bitcoind
+```
+- paste this code into the CMD prompt of the bitcoind container, this will launch the bitcoind node,  connect the two peers, and mine 101 blocks
+```
+	./launch.sh 
+```
+- visit localhost:5000, you should see the new 101 blocks in the toshi client
 
+### TODO
+- automate the "paste into CMD" parts
+- daemonize them
+- connect to both with RPC
