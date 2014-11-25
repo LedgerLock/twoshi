@@ -5,11 +5,12 @@ Based on
 - [creating-your-own-experimental-bitcoin-network](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
 
 ### to run the network
-- clone this repo
-- clone the toshi repo's branch with an ammended Docker file, along side this repo
+- clone this repo, and init the toshi submodule which is on the docker branch until such time that my [pull request](https://github.com/coinbase/toshi/pull/131) is merged into coinbase/toshi
 ```
-	cd ../
-	git clone git@github.com:assafshomer/toshi.git --branch docker
+ 	git clone git@github.com:assafshomer/regtest-docker.git 	
+	cd regtest-docker
+  git submodule init
+  git submodule update	
 ```
 - cd back into this repo and build the toshi and bitcoind images
 ```
@@ -44,6 +45,6 @@ Based on
 
 ### TODO
 - automate the "paste into CMD" parts
-- include toshi as a git submodule instead of manually cloaning it along side this repo
+- ~~include toshi as a git submodule instead of manually cloaning it along side this repo~~
 - daemonize both containers
 - connect to both with RPC
