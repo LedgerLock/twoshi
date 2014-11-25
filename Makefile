@@ -9,17 +9,16 @@ DOCKER_BOB  =$(DOCKER_RUN) -t -p 19444:18444 -p 19332:18332 --name=bob --hostnam
 
 DOCKER_DB_TOSHI		=$(DOCKER_RUN) -d --name toshi_db postgres
 DOCKER_REDIS_TOSHI=$(DOCKER_RUN) -d --name toshi_redis redis
-DOCKER_TOSHI 			=$(DOCKER_RUN) -t -p 5000:5000 --name toshi --link toshi_db:db --link toshi_redis:redis
+DOCKER_TOSHI 			=$(DOCKER_RUN) -t -p 5000:5000 --name toshi --hostname toshi --link toshi_db:db --link toshi_redis:redis
 DOCKER_BITCOIND   =$(DOCKER_RUN) -t -p 18444:18444 -p 18332:18332 --name=bitcoind --hostname=bitcoind --link toshi:toshi
 
 RUN_DAEMON=bitcoind -regtest -rpcallowip=* -printtoconsole
 RUN_SHELL=bash
 
+
+
 build_bitcoind:
 	sudo docker build -t=$(BITCOIND_IMG) $(BITCOIND_DOCKERFILE_DIR)
-
-build_bd_example:
-	sudo docker build -t=example $(BITCOIND_DOCKERFILE_DIR)
 
 # this relies on a clone of the toshi repo along side this repo, with the corrected docker file that is currently only in my 'docker' branch
 build_toshi: 
@@ -28,10 +27,10 @@ build_toshi:
 rm_bitcoind:
 	-sudo docker rm -f bitcoind	
 
-alice_rm:
+rm_alice:
 	-sudo docker rm -f alice
 
-bob_rm:
+rm_bob:
 	-sudo docker rm -f bob
 
 rm_toshi:
@@ -43,28 +42,30 @@ rm_toshi_redis:
 rm_toshi_db:
 	-sudo docker rm -f toshi_db
 
-alice_daemon: alice_rm
+alice_daemon: rm_alice
 	$(DOCKER_ALICE) -d=true $(BITCOIND_IMG) $(RUN_DAEMON)
 
-alice_shell: alice_rm
+alice_shell: rm_alice
 	$(DOCKER_ALICE) -i $(BITCOIND_IMG) $(RUN_SHELL)
 
-bob_daemon: bob_rm
+bob_daemon: rm_bob
 	$(DOCKER_BOB) -d=true $(BITCOIND_IMG) $(RUN_DAEMON)
 
-bob_shell: bob_rm
+bob_shell: rm_bob
 	$(DOCKER_BOB) -i $(BITCOIND_IMG) $(RUN_SHELL)
-
-bob_example: bob_rm
-	$(DOCKER_BOB) -i $(BITCOIND_IMG) $(RUN_SHELL) 
 
 bitcoind_shell: rm_bitcoind
 	$(DOCKER_BITCOIND) -i $(BITCOIND_IMG) $(RUN_SHELL)
 
 launch_toshi_db: 
 	$(DOCKER_DB_TOSHI)
+
 launch_toshi_redis: 
 	$(DOCKER_REDIS_TOSHI)
 
-toshi_shell: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
+toshi: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
 	$(DOCKER_TOSHI) -i $(TOSHI_IMG)
+
+bitcoind: rm_bitcoind
+	$(DOCKER_BITCOIND) -i $(BITCOIND_IMG)
+
