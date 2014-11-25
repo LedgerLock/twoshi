@@ -1,7 +1,7 @@
 BITCOIND_IMG=assafshomer/bitcoind-regtest
 TOSHI_IMG=assafshomer/toshi-regtest
 BITCOIND_DOCKERFILE_DIR=bitcoind-regtest
-TOSHI_DOCKERFILE_DIR=../toshi
+TOSHI_DOCKERFILE_DIR=toshi
 
 DOCKER_RUN=sudo docker run
 DOCKER_ALICE=$(DOCKER_RUN) -t -p 20444:18444 -p 20332:18332 --name=alice --hostname=alice
@@ -20,7 +20,6 @@ RUN_SHELL=bash
 build_bitcoind:
 	sudo docker build -t=$(BITCOIND_IMG) $(BITCOIND_DOCKERFILE_DIR)
 
-# this relies on a clone of the toshi repo along side this repo, with the corrected docker file that is currently only in my 'docker' branch
 build_toshi: 
 	sudo docker build -t=$(TOSHI_IMG) $(TOSHI_DOCKERFILE_DIR)
 	

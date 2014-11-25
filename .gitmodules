@@ -1,0 +1,3 @@
+[submodule "toshi"]
+	path = toshi
+	url = git@github.com:assafshomer/toshi.git

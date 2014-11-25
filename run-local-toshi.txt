@@ -48,19 +48,18 @@ stop toshi node
 ctrl+C
 
 
+=================================
+*********************************
+ADDING TOSHI AS A SUBMODULE
+*********************************
+=================================
 
-
-
-
-
-
-
-
-
-
-
-
-
+git submodule add git@github.com:assafshomer/toshi.git
+git submodule init
+git submodule update
+# now change to the docker branch in the toshi submodule
+cd toshi
+git checkout docker
 
 
 =================================
