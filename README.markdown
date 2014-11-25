@@ -6,4 +6,6 @@ Based on
 
 ### to run the network
 -  clone the toshi repo's branch with an ammended Docker file
-`git clone git@github.com:assafshomer/toshi.git --branch docker`
+```
+git clone git@github.com:assafshomer/toshi.git --branch docker
+```
