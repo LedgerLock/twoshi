@@ -26,6 +26,8 @@ build_bitcoind:
 build_toshi: customize_toshi_dockerfile
 	sudo docker build -t=$(TOSHI_IMG) $(TOSHI_DOCKERFILE_DIR)
 	
+build_regtest: build_toshi build_bitcoind
+
 rm_bitcoind:
 	-sudo docker rm -f bitcoind	
 
@@ -71,9 +73,12 @@ toshi_shell: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_re
 bitcoind: rm_bitcoind
 	$(DOCKER_BITCOIND) -i $(BITCOIND_IMG)
 
-build_regtest_images: build_toshi build_bitcoind
-
 toshi_daemon: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
 	$(DOCKER_TOSHI) -d=true $(TOSHI_IMG) /bin/bash toshi_launch.sh
 	sleep "5"
 	sudo docker start toshi
+
+bitcoind_daemon: rm_bitcoind
+	$(DOCKER_BITCOIND) -d=true $(BITCOIND_IMG) /bin/bash bitcoind_launch.sh
+	sleep "5"
+	sudo docker start bitcoind

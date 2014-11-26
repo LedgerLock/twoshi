@@ -16,7 +16,7 @@ Based on
 - cd back into this repo and build the toshi and bitcoind images
 ```Batchfile
 	cd regtest-docker
-	make build_regtest_images
+	make build_regtest
 ```
 - If no change was made to one of the images you can create only one or the other (or none)
 ```Batchfile

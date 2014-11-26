@@ -7,5 +7,5 @@ bitcoind -regtest -daemon -printtoconsole
 sleep "5"
 echo "Adding Toshi node at IP:"$TOSHI_IP
 bitcoind -regtest addnode $TOSHI_IP onetry
-echo "Mining 101 blocks"
-bitcoind -regtest setgenerate true 101
+# echo "Mining 101 blocks"
+# bitcoind -regtest setgenerate true 101
