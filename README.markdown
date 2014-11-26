@@ -30,7 +30,12 @@ The first time you run this it will take a little while to build the images. Aft
 ```
 
 ### Stop
-- hit CTRL+D in the bitcoind CMD prompt you were left with in the host terminal where you typed **make regtest**
+- hit **CTRL+D** in the bitcoind CMD prompt you were left with in the host terminal where you typed **make regtest**
+
+### Reconnect
+```Batchfile
+	sudo docker restart bitcoind
+```
 
 ### Cleanup
 - If you are **NOT** worried about other docker containers running on your host 
