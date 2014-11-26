@@ -15,10 +15,14 @@ DOCKER_BITCOIND   =$(DOCKER_RUN) -t -p 18444:18444 -p 18332:18332 --name=bitcoin
 RUN_DAEMON=bitcoind -regtest -rpcallowip=* -printtoconsole
 RUN_SHELL=bash
 
+customize_toshi_dockerfile: 
+	cp custom_toshi_dockerfile toshi/Dockerfile
+	cp toshi_launch.sh toshi/
+
 build_bitcoind:
 	sudo docker build -t=$(BITCOIND_IMG) $(BITCOIND_DOCKERFILE_DIR)
 
-build_toshi: 
+build_toshi: customize_toshi_dockerfile
 	sudo docker build -t=$(TOSHI_IMG) $(TOSHI_DOCKERFILE_DIR)
 	
 rm_bitcoind:

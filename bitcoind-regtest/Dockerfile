@@ -12,5 +12,5 @@ RUN echo "rpcuser=test\nrpcpassword=test\n" > ~/.bitcoin/bitcoin.conf
 
 RUN echo "alias rt='bitcoind -regtest'" >> ~/.bashrc
 
-ADD launch.sh ./
-RUN chmod a+wx launch.sh
+ADD bitcoind_launch.sh ./
+RUN chmod a+wx bitcoind_launch.sh
