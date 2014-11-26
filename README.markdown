@@ -40,4 +40,4 @@ Unfortunately, at the moment the bitcoind client shuts down immediatly
 
 ### TODO
 - daemonize the bitcoind client without it shutting down
-- connect to both with RPC
+- connect to toshi tx stream

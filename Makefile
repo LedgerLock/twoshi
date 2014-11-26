@@ -18,7 +18,7 @@ RUN_SHELL=bash
 
 customize_toshi_dockerfile: 
 	cp custom_toshi_dockerfile toshi/Dockerfile
-	cp toshi_launch.sh toshi/
+	cp scripts/toshi_launch.sh toshi/
 
 build_bitcoind:
 	sudo docker build -t=$(BITCOIND_IMG) $(BITCOIND_DOCKERFILE_DIR)
@@ -81,3 +81,5 @@ bitcoind_daemon: rm_bitcoind
 	sudo docker start bitcoind
 
 regtest: build_regtest toshi_daemon bitcoind_daemon
+
+regtest_shell: build_regtest toshi_daemon bitcoind_shell
