@@ -1,3 +1,4 @@
+#! /bin/bash
 echo "This is toshi launch"
 echo "Setting up evn vars"
 export DATABASE_URL=postgres://postgres:@$DB_PORT_5432_TCP_ADDR:$DB_PORT_5432_TCP_PORT
