@@ -5,6 +5,7 @@ Based on
 - [creating-your-own-experimental-bitcoin-network](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
 
 ### to run the network
+#### create node images
 - clone this repo, and init the toshi submodule which is on the docker branch until such time that my [pull request](https://github.com/coinbase/toshi/pull/131) is merged into coinbase/toshi
 ```Batchfile
 	git clone git@github.com:assafshomer/regtest-docker.git 	
@@ -17,6 +18,12 @@ Based on
 	cd regtest-docker
 	make build_regtest_images
 ```
+- If no change was made to one of the images you can create only one or the other (or none)
+```Batchfile
+	make build_bitcoind
+	make build_toshi
+```
+#### launch node containers
 - launch the toshi container 
 ```Batchfile
 	make toshi
@@ -42,6 +49,8 @@ Based on
 	./launch.sh 
 ```
 - visit localhost:5000, you should see the new 101 blocks in the toshi client
+
+
 
 ### TODO
 - automate the "paste into CMD" parts
