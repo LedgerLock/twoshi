@@ -15,6 +15,7 @@ DOCKER_BITCOIND   =$(DOCKER_RUN) -t -p 18444:18444 -p 18332:18332 --name=bitcoin
 RUN_DAEMON=bitcoind -regtest -rpcallowip=* -printtoconsole
 RUN_SHELL=bash
 
+
 customize_toshi_dockerfile: 
 	cp custom_toshi_dockerfile toshi/Dockerfile
 	cp toshi_launch.sh toshi/
@@ -64,7 +65,7 @@ launch_toshi_db:
 launch_toshi_redis: 
 	$(DOCKER_REDIS_TOSHI)
 
-toshi: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
+toshi_shell: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
 	$(DOCKER_TOSHI) -i $(TOSHI_IMG)
 
 bitcoind: rm_bitcoind
@@ -73,4 +74,6 @@ bitcoind: rm_bitcoind
 build_regtest_images: build_toshi build_bitcoind
 
 toshi_daemon: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
-	$(DOCKER_TOSHI) -d=true $(TOSHI_IMG) $(RUN_SHELL)
+	$(DOCKER_TOSHI) -d=true $(TOSHI_IMG) /bin/bash toshi_launch.sh
+	sleep "5"
+	sudo docker start toshi
