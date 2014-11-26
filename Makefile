@@ -58,9 +58,6 @@ bob_daemon: rm_bob
 bob_shell: rm_bob
 	$(DOCKER_BOB) -i $(BITCOIND_IMG) $(RUN_SHELL)
 
-bitcoind_shell: rm_bitcoind
-	$(DOCKER_BITCOIND) -i $(BITCOIND_IMG) $(RUN_SHELL)
-
 launch_toshi_db: 
 	$(DOCKER_DB_TOSHI)
 
@@ -70,13 +67,13 @@ launch_toshi_redis:
 toshi_shell: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
 	$(DOCKER_TOSHI) -i $(TOSHI_IMG)
 
-bitcoind: rm_bitcoind
-	$(DOCKER_BITCOIND) -i $(BITCOIND_IMG)
-
 toshi_daemon: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
 	$(DOCKER_TOSHI) -d=true $(TOSHI_IMG) /bin/bash toshi_launch.sh
 	sleep "5"
 	sudo docker start toshi
+
+bitcoind_shell: rm_bitcoind build_bitcoind
+	$(DOCKER_BITCOIND) -i $(BITCOIND_IMG) $(RUN_SHELL)
 
 bitcoind_daemon: rm_bitcoind
 	$(DOCKER_BITCOIND) -d=true $(BITCOIND_IMG) /bin/bash bitcoind_launch.sh
