@@ -12,7 +12,7 @@ Based on
 	cd regtest-docker 	
 ```
 ### Launch 
-- launch the regtest 2 node network with tohsi daemonized, bitcoind shell
+- launch the regtest two-node-network with toshi daemonized, bitcoind shell
 ```Batchfile
 	make regtest
 ```
