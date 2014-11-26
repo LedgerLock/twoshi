@@ -11,6 +11,7 @@ Based on
 	cd regtest-docker 	
 ```
 - launch the regtest 2 node network
+
 #### fully daemonized
 ```Batchfile
 	make regtest
