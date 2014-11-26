@@ -82,3 +82,5 @@ bitcoind_daemon: rm_bitcoind
 	$(DOCKER_BITCOIND) -d=true $(BITCOIND_IMG) /bin/bash bitcoind_launch.sh
 	sleep "5"
 	sudo docker start bitcoind
+
+regtest: build_regtest toshi_daemon bitcoind_daemon
