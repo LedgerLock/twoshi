@@ -26,7 +26,17 @@ The first time you run this it will take a little while to build the docker imag
 - The Bitcoind docker container is running a terminal console (hit enter to see that)
 
 ### Control
-- visit localhost:5000, you should see a new the toshi client with one node connected to it.
+- Visit localhost:5000, you should see a new the toshi client with one node connected to it.
+- The Bitcoind shell accepts the alias `rt` for `bitcoind -regtest` so you can use the [bitcoind api](https://bitcoin.org/en/developer-reference#bitcoin-core-apis), for example:
+```Batchfile
+	rt getinfo
+	rt getpeerinfo
+	rt setgenerate true 101
+	rt getnewaddress
+	...........
+```
+Of course, this is not the way to do it, you want to control it programatically.
+
 - connect to the bitcoind node with RPC using a [bitcoin rpc client](https://en.bitcoin.it/wiki/API_reference_(JSON-RPC)#Ruby)
 ```Ruby
 	node = BitcoinRPC.new('http://test:test@127.0.0.1:18332')
