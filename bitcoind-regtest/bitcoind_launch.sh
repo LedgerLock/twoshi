@@ -16,5 +16,12 @@ bitcoind -regtest -daemon -rpcallowip=* -printtoconsole
 sleep "5"
 echo "Adding Toshi node at IP:"$TOSHI_IP
 bitcoind -regtest addnode $TOSHI_IP onetry
-echo "Mining 101 blocks"
-bitcoind -regtest setgenerate true 101
+export BNUM="$(bitcoind -regtest getblockcount)"
+if [ $BNUM -eq 0 ] 
+	then
+		echo "Mining 101 blocks"
+		bitcoind -regtest setgenerate true 101
+	else
+		echo "Not mining any more blocks, " $BNUM " blocks already found"
+fi
+# rm /etc/init.d/bitcoind_launch.sh

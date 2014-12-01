@@ -82,20 +82,23 @@ Of course, this is not the way to do it, you want to control it programatically.
 
 ### Stop
 - hit **CTRL+D** in the bitcoind CMD prompt you were left with in the host terminal where you typed **make regtest**
-- you can also type
+- you can also type in a **host** terminal window
 ```Batchfile
 	sudo docker stop bitcoind
 ```
 Note that this stops the bitcoind dameon.
 
 ### Reconnect
+
+- restart the stopped bitciond container
 ```Batchfile
-	sudo docker restart bitcoind
+	sudo docker restart bitcoind	
+```
+At the moment, when you do this a new bitcoind damon is launched, and as a consequence toshi will **register a new peer** (not sure this matters).
+- attache to the container's terminal
+```Batchfile
 	sudo docker attach bitcoind
 ```
-At the moment, when you do this bitcoind_launch runs again launching a new bitcoind damon and mining 101 blocks. 
-As a consequence, toshi will **register a new peer** and an extra 101 blocks are mined.
-I'll fix the extra mining later with an if statement in the batch file, but I'm not sure there is a way around registering a new peer (or that it matters).
 
 ### Cleanup
 - If you are **NOT** worried about other docker containers running on your host 
