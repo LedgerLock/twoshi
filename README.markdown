@@ -1,5 +1,6 @@
-# A [Dockerized](https://www.docker.com/) local two-node bitcoin regtest network 
-## with one [toshi](https://toshi.io) node and one [bitcoind](https://en.bitcoin.it/wiki/Bitcoind) node
+# A local two-node Bitcoin [regtest](https://bitcoin.org/en/developer-examples#regtest-mode) network 
+## with one [toshi](https://toshi.io) node and one [bitcoind](https://en.bitcoin.it/wiki/Bitcoind) node, powered by [Docker](https://www.docker.com/)
+
 Inspired by
 - [toshi docker image](http://www.soroushjp.com/2014/10/15/deploying-your-own-toshi-api-bitcoin-node-using-coreos-docker-aws/)
 - [creating-your-own-experimental-bitcoin-network](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
