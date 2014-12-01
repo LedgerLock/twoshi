@@ -83,4 +83,4 @@ bitcoind_daemon: rm_bitcoind
 
 regtest_daemon: build_regtest toshi_daemon bitcoind_daemon
 
-regtest: build_regtest toshi_daemon bitcoind_shell
+twoshi: build_regtest toshi_daemon bitcoind_shell

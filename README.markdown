@@ -18,7 +18,7 @@ Inspired by
 ### Launch 
 - launch the regtest two-node-network
 ```Batchfile
-	make regtest
+	make twoshi
 ```
 The first time you run this it will take a little while to build the docker images. After that it will be very fast.
 
@@ -39,7 +39,7 @@ The first time you run this it will take a little while to build the docker imag
 ```Batchfile
 	GET https://localhost:5000/api/<version>/addresses/<hash>
 ```
-- subscribe to toshi transactions and block [websocket notifications](https://toshi.io/docs/#websockets) with the following connection URL
+- subscribe to toshi transactions and blocks [websocket notifications](https://toshi.io/docs/#websockets) with the following connection URL
 ```Batchfile
 	ws://localhost:5000
 ```
