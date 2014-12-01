@@ -5,8 +5,9 @@ Inspired by
 - [toshi docker image](http://www.soroushjp.com/2014/10/15/deploying-your-own-toshi-api-bitcoin-node-using-coreos-docker-aws/)
 - [creating-your-own-experimental-bitcoin-network](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
 
-## How to use twoshi
-### [Install Docker](https://docs.docker.com/installation/)
+# How to use twoshi
+### Docker
+- [Install Docker](https://docs.docker.com/installation/)
 
 ### Clone
 - clone this repo, including the toshi submodule which is on the docker branch until such time that my [pull request](https://github.com/coinbase/toshi/pull/131) is merged into coinbase/toshi
