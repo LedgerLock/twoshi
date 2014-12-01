@@ -94,8 +94,8 @@ Note that this stops the bitcoind dameon.
 ```Batchfile
 	sudo docker restart bitcoind	
 ```
-At the moment, when you do this a new bitcoind damon is launched, and as a consequence toshi will **register a new peer** (not sure this matters).
-- attache to the container's terminal
+At the moment, when you do this a new bitcoind damon is launched and automatically connects to toshi, and as a consequence toshi will **register a new peer** (not sure this matters).
+- You can attach to the container's terminal
 ```Batchfile
 	sudo docker attach bitcoind
 ```
