@@ -21,9 +21,9 @@ Inspired by
 	make regtest
 ```
 The first time you run this it will take a little while to build the docker images. After that it will be very fast.
--- The Toshi docker container is running in the background (daemonized)
--- The Bitcoind docker container is running a terminal console (hit enter to see that)
 
+- The Toshi docker container is running in the background (daemonized)
+- The Bitcoind docker container is running a terminal console (hit enter to see that)
 
 ### Control
 - visit localhost:5000, you should see a new the toshi client with one node connected to it.
