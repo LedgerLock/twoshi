@@ -23,16 +23,19 @@ Inspired by
 The first time you run this it will take a little while to build the docker images. After that it will be very fast.
 
 - The Toshi docker container is running in the background (daemonized)
-- The Bitcoind docker container is running a terminal console (hit enter to see that)
+- The Bitcoind docker container is running a terminal console. Hit enter and you should see
+```Batchfile
+	root@bitcoind:/#
+```
 
 ### Control
 - Visit localhost:5000, you should see a new the toshi client with one node connected to it.
 - The Bitcoind shell accepts the alias `rt` for `bitcoind -regtest` so you can use the [bitcoind api](https://bitcoin.org/en/developer-reference#bitcoin-core-apis), for example:
 ```Batchfile
-	rt getinfo
-	rt getpeerinfo
-	rt setgenerate true 101
-	rt getnewaddress
+	root@bitcoind:/# rt getinfo
+	root@bitcoind:/# rt getpeerinfo
+	root@bitcoind:/# rt setgenerate true 101
+	root@bitcoind:/# rt getnewaddress
 	...........
 ```
 Of course, this is not the way to do it, you want to control it programatically.
