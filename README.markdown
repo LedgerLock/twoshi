@@ -1,10 +1,12 @@
-# Local bitcoin network 
-## with one [bitcoind](https://en.bitcoin.it/wiki/Bitcoind) node and one [toshi](https://toshi.io) node
-Based on 
+# A [Dockerized](https://www.docker.com/) local two-node bitcoin regtest network 
+## with one [toshi](https://toshi.io) node and one [bitcoind](https://en.bitcoin.it/wiki/Bitcoind) node
+Inspired by
 - [toshi docker image](http://www.soroushjp.com/2014/10/15/deploying-your-own-toshi-api-bitcoin-node-using-coreos-docker-aws/)
 - [creating-your-own-experimental-bitcoin-network](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
 
-## How to run the network
+## How to use twoshi
+### [Install Docker](https://docs.docker.com/installation/)
+
 ### Clone
 - clone this repo, including the toshi submodule which is on the docker branch until such time that my [pull request](https://github.com/coinbase/toshi/pull/131) is merged into coinbase/toshi
 ```Batchfile
@@ -16,7 +18,7 @@ Based on
 ```Batchfile
 	make regtest
 ```
-The first time you run this it will take a little while to build the images. After that it will be very fast.
+The first time you run this it will take a little while to build the docker images. After that it will be very fast.
 
 ### Control
 - visit localhost:5000, you should see a new the toshi client with one node connected to it.
@@ -27,6 +29,37 @@ The first time you run this it will take a little while to build the images. Aft
 	node.setgenerate(true,101)
 	node.sendtoaddress(node.getnewaddress,123.456)
 	........
+```
+- use the toshi [api](https://toshi.io/docs/), for example, find the [balance in an address](https://toshi.io/docs/#get-address-balance)
+```Batchfile
+	GET https://localhost:5000/api/<version>/addresses/<hash>
+```
+- subscribe to toshi transactions and block [websocket notifications](https://toshi.io/docs/#websockets) with the following connection URL
+```Batchfile
+	ws://localhost:5000
+```
+[For example](https://github.com/faye/faye-websocket-ruby), subscribing to transactions would involve sending the string
+```Ruby
+	require 'faye/websocket'
+	require 'eventmachine'
+
+	EM.run {
+	  ws = Faye::WebSocket::Client.new('ws://localhost:5000')
+
+	  ws.on :open do |event|
+	    p [:open]
+	    ws.send('{"subscribe":"'+"transactions"+'"}')
+	  end
+
+	  ws.on :message do |event|
+	    p [:message, event.data]
+	  end
+
+	  ws.on :close do |event|
+	    p [:close, event.code, event.reason]
+	    ws = nil
+	  end
+	}
 ```
 
 ### Stop
@@ -49,6 +82,3 @@ The first time you run this it will take a little while to build the images. Aft
 	./cleardocker_byname.sh toshi
 	./cleardocker_byname.sh bitcoind
 ```
-
-### TODO
-- connect to toshi tx stream
