@@ -28,7 +28,7 @@ The first time you run this it will take a little while to build the docker imag
 	root@bitcoind:/#
 ```
 - Visit localhost:5000, you should see a new the toshi client with one node connected to it.
-![Alt text](/images/TwoshiDefault.png?raw=true "Toshi cotainer hooked up to bitcoind")
+![Alt text](/images/toshionlaunch.png?raw=true "Toshi cotainer hooked up to bitcoind on startup, with 101 blocks mined")
 
 
 ### Control
