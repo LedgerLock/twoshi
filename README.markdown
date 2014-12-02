@@ -27,9 +27,11 @@ The first time you run this it will take a little while to build the docker imag
 ```Batchfile
 	root@bitcoind:/#
 ```
+- Visit localhost:5000, you should see a new the toshi client with one node connected to it.
+![Alt text](/images/TwoshiDefault.png?raw=true "Toshi cotainer hooked up to bitcoind")
+
 
 ### Control
-- Visit localhost:5000, you should see a new the toshi client with one node connected to it.
 - The Bitcoind shell accepts the alias `rt` for `bitcoind -regtest` so you can use the [bitcoind api](https://bitcoin.org/en/developer-reference#bitcoin-core-apis), for example:
 ```Batchfile
 	root@bitcoind:/# rt getinfo
@@ -69,14 +71,7 @@ Of course, this is not the way to do it, you want to control it programatically.
 	    ws.send('{"subscribe":"'+"transactions"+'"}')
 	  end
 
-	  ws.on :message do |event|
-	    p [:message, event.data]
-	  end
-
-	  ws.on :close do |event|
-	    p [:close, event.code, event.reason]
-	    ws = nil
-	  end
+	  .......
 	}
 ```
 
