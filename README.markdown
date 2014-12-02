@@ -28,6 +28,7 @@ The first time you run this it will take a little while to build the docker imag
 	root@bitcoind:/#
 ```
 - Visit localhost:5000, you should see a new the toshi client with one node connected to it.
+
 ![Alt text](/images/toshionlaunch.png?raw=true "Toshi cotainer hooked up to bitcoind on startup, with 101 blocks mined")
 
 
@@ -58,7 +59,7 @@ Of course, this is not the way to do it, you want to control it programatically.
 ```Batchfile
 	ws://localhost:5000
 ```
-[For example](https://github.com/faye/faye-websocket-ruby), subscribing to transactions would involve sending the string
+[For example](https://github.com/faye/faye-websocket-ruby), subscribing to transactions:
 ```Ruby
 	require 'faye/websocket'
 	require 'eventmachine'
@@ -81,7 +82,10 @@ Of course, this is not the way to do it, you want to control it programatically.
 ```Batchfile
 	sudo docker stop bitcoind
 ```
-Note that this stops the bitcoind dameon.
+This stops the bitcoind daemon.
+- if you visit localhost:5000 you can see that the toshi client is now offline with 0 peers connected to it
+
+![Alt text](/images/toshioffline.png?raw=true "Toshi cotainer offline")
 
 ### Reconnect
 
@@ -90,6 +94,9 @@ Note that this stops the bitcoind dameon.
 	sudo docker restart bitcoind	
 ```
 At the moment, when you do this a new bitcoind damon is launched and automatically connects to toshi, and as a consequence toshi will **register a new peer** (not sure this matters).
+
+![Alt text](/images/toshibackonline.png?raw=true "Toshi cotainer back online, connected to the restarted bitcoind container counted as a new peer")
+
 - You can attach to the container's terminal
 ```Batchfile
 	sudo docker attach bitcoind
