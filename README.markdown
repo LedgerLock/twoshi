@@ -1,7 +1,5 @@
-# A local two-node Bitcoin [regtest](https://bitcoin.org/en/developer-examples#regtest-mode) network 
-## One [toshi](https://toshi.io) node 
-## one [bitcoind](https://en.bitcoin.it/wiki/Bitcoind) node
-## powered by [Docker](https://www.docker.com/)
+# A local two-node Bitcoin [regtest](https://bitcoin.org/en/developer-examples#regtest-mode) network. 
+## One [toshi](https://toshi.io) node, one [bitcoind](https://en.bitcoin.it/wiki/Bitcoind) node, [Dockerized](https://www.docker.com/).
 
 Inspired by
 - [toshi docker image](http://www.soroushjp.com/2014/10/15/deploying-your-own-toshi-api-bitcoin-node-using-coreos-docker-aws/)
