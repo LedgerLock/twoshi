@@ -31,6 +31,7 @@ The first time you run this it will take a little while to build the docker imag
 ```Batchfile
 	root@bitcoind:/#
 ```
+If you are wondering why we need to run console in the bitcoind container, the reason is the way [docker works](https://docs.docker.com/userguide/dockerizing/). We want to keep the bitconid container running but Docker containers only run as long as the command we specify is active.
 
 ### Control
 - The Bitcoind shell accepts the alias `rt` for `bitcoind -regtest` so you can use the [bitcoind api](https://bitcoin.org/en/developer-reference#bitcoin-core-apis), for example:
@@ -103,6 +104,10 @@ At the moment, when you do this a new bitcoind damon is launched and automatical
 ```
 
 ### Cleanup
+- The first time you do this you need to give the scripts exec permissions
+```Batchfile
+	sudo chmod a+wx scripts/cleardocker*.sh
+```
 - If you are **NOT** worried about other docker containers running on your host 
 ```Batchfile
 	cd scripts
