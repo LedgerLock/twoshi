@@ -20,6 +20,12 @@ Inspired by
 ```Batchfile
 	make twoshi
 ```
+- If you don't have any other docker containers you care about and you wish to remove all lingering images and containers before launching twoshi you can use
+```Batchfile
+	make twoshi_clean
+```
+which will first clear everything up and then launch twoshi
+
 The first time you run this it will take a little while to build the docker images. After that it will be very fast.
 
 - The Toshi docker container is running in the background (daemonized)
@@ -119,3 +125,9 @@ At the moment, when you do this a new bitcoind damon is launched and automatical
 	./cleardocker_byname.sh toshi
 	./cleardocker_byname.sh bitcoind
 ```
+
+- You can also run
+```Batchfile
+	make cleanup
+```
+which will run cleardocker.sh for you

@@ -20,6 +20,9 @@ customize_toshi_dockerfile:
 	cp custom_toshi_dockerfile toshi/Dockerfile
 	cp scripts/toshi_launch.sh toshi/
 
+cleanup:
+	sudo ./scripts/cleardocker.sh
+
 build_bitcoind:
 	sudo docker build -t=$(BITCOIND_IMG) $(BITCOIND_DOCKERFILE_DIR)
 
@@ -84,3 +87,5 @@ bitcoind_daemon: rm_bitcoind
 regtest_daemon: build_regtest toshi_daemon bitcoind_daemon
 
 twoshi: build_regtest toshi_daemon bitcoind_shell
+
+twoshi_clean: cleanup twoshi
