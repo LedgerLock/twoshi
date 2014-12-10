@@ -84,7 +84,7 @@ Of course, this is not the way to do it, you want to control it programatically.
 ```
 
 ### Stop
-- hit **CTRL+D** in the bitcoind CMD prompt you were left with in the host terminal where you typed **make regtest**
+- hit **CTRL+D** in the bitcoind CMD prompt you were left with in the host terminal where you typed **make twoshi**
 - you can also type in a **host** terminal window
 ```Batchfile
 	sudo docker stop bitcoind
@@ -96,7 +96,7 @@ This stops the bitcoind daemon.
 
 ### Reconnect
 
-- restart the stopped bitciond container
+- restart the stopped bitcoind container
 ```Batchfile
 	sudo docker restart bitcoind	
 ```
