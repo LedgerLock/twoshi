@@ -134,4 +134,7 @@ which will run cleardocker.sh for you
 
 ### Debug
 - If after cloning you type `make twoshi` and it just doesn't work, make sure you cloned recursively
+<pre>
+sample <b>sample</b> sample
+</pre>
 > git clone **--recursive** git@github.com:LedgerLock/twoshi.git
