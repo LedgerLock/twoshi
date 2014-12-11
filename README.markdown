@@ -131,3 +131,7 @@ At the moment, when you do this a new bitcoind damon is launched and automatical
 	make cleanup
 ```
 which will run cleardocker.sh for you
+
+### Debug
+- If after cloning you type `make twoshi` and it just doesn't work, make sure you cloned recursively
+> git clone **--recursive** git@github.com:LedgerLock/twoshi.git
