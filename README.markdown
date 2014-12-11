@@ -137,7 +137,7 @@ which will run cleardocker.sh for you
 <pre>
 git clone <b>--recursive</b> git@github.com:LedgerLock/twoshi.git
 </pre>
-- If both toshi is launched (as you can check by pointing your broswer to `localhost:5000`) and bitcoind is running (as you can confirm by hitting return and being inside `root@bitcoind:/# `) but they are disconnected (see red indication **offline** in image below)
+- If both toshi is launched (as you can check by pointing your browser to `localhost:5000`) and bitcoind is running (as you can confirm by hitting return and being inside `root@bitcoind:/# `) but they are disconnected (see red indication **offline** in image below)
 
 ![Alt text](/images/offline.png?raw=true "Toshi cotainer is disconnected from bitcoind")
 
