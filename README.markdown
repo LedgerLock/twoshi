@@ -141,7 +141,9 @@ git clone <b>--recursive</b> git@github.com:LedgerLock/twoshi.git
 
 ![Alt text](/images/offline.png?raw=true "Toshi cotainer is disconnected from bitcoind")
 
-Increase the 5 seconds delay in `bitcoind-regtest/bitcoind_launch`, e.g:
+Increase the 5 seconds delay in `bitcoind-regtest/bitcoind_launch`
+
+e.g:
 
 <pre>
 	.....
@@ -150,3 +152,8 @@ Increase the 5 seconds delay in `bitcoind-regtest/bitcoind_launch`, e.g:
 	echo "Adding Toshi node at IP:"$TOSHI_IP
 	.....
 <pre>
+
+Now build it again
+```Batchfile
+	make twoshi_clean
+```
