@@ -13,6 +13,7 @@ export tmp=${TOSHI_PORT/tcp:\/\//}
 export TOSHI_IP=${tmp/:*/}
 echo "launching bitcoind daemon in regtest mode"
 bitcoind -regtest -daemon -rpcallowip=* -printtoconsole
+# increase the number of seconds to more than 5 if bitcoind didn't manage to connect to toshi
 sleep "5"
 echo "Adding Toshi node at IP:"$TOSHI_IP
 bitcoind -regtest addnode $TOSHI_IP onetry
