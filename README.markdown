@@ -137,7 +137,7 @@ which will run cleardocker.sh for you
 <pre>
 git clone <b>--recursive</b> git@github.com:LedgerLock/twoshi.git
 </pre>
-- If both toshi is launched (as you can check by pointing your broswer to `localhost:5000`) and bitcoind is running (as you can confirm by hitting return and being inside `root@bitcoind:/# `) but they are disconnected (see red indication below), try to increase the 5 seconds delay in `bitcoind-regtest/bitcoind_launch`
+- If both toshi is launched (as you can check by pointing your broswer to `localhost:5000`) and bitcoind is running (as you can confirm by hitting return and being inside `root@bitcoind:/# `) but they are disconnected (see red indication **offline** in image below), try to increase the 5 seconds delay in `bitcoind-regtest/bitcoind_launch`
 <pre>
 	.....
 	# increase the number of seconds to more than 5 if bitcoind didn't manage to connect to toshi
