@@ -51,15 +51,17 @@ If you are wondering why we need to run console in the bitcoind container, the r
 ```
 Of course, this is not the way to do it, you want to control it programatically.
 
-- connect to the bitcoind node with RPC using a [bitcoin rpc client](https://en.bitcoin.it/wiki/API_reference_(JSON-RPC)#Ruby)
+- connect to the bitcoind node with RPC using a [bitcoin rpc client](https://en.bitcoin.it/wiki/API_reference_(JSON-RPC)#Ruby). You can use the [example implementation](/examples/bitcoin_rpc.rb) that connects you directly to the bitcoind in twoshi.
+For example, in the twoshi root directory you can launch an IRB console and type
+
 ```Ruby
-	node = BitcoinRPC.new('http://test:test@127.0.0.1:18332')
+	require './examples/bitcoin_rpc.rb'
+	node = BitcoinRPC.new
 	node.getinfo
 	node.setgenerate(true,101)
 	node.sendtoaddress(node.getnewaddress,123.456)
 	........
 ```
-See this [example implementation](/examples/bitcoin_rpc.rb) for an RPC client that connects you directly to the bitcoind in twoshi.
 
 - use the toshi [api](https://toshi.io/docs/), for example, find the [balance in an address](https://toshi.io/docs/#get-address-balance)
 ```Batchfile
