@@ -131,7 +131,7 @@ git clone <b>--recursive</b> git@github.com:LedgerLock/twoshi.git
 
 ![Alt text](/images/offline.png?raw=true "Toshi cotainer is disconnected from bitcoind")
 
-try to increase the 5 seconds delay in `bitcoind-regtest/bitcoind_launch`
+try to increase the 5 seconds delay in [bitcoind-regtest/bitcoind_launch](/bitcoind-regtest/bitcoind_launch.sh)
 <pre>
 	.....
 	# increase the number of seconds to more than 5 if bitcoind didn't manage to connect to toshi
