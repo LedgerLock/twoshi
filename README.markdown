@@ -73,6 +73,20 @@ For example, in the twoshi root directory you can launch an IRB console and type
 ```
 See this [example implementation](/examples/toshi_websocket.rb) for subscribing to transactions.
 
+For example, in the twoshi root directory you can launch an IRB console and type:
+```Ruby
+	require './examples/toshi_websocket.rb'
+  require './examples/bitcoin_rpc.rb'
+	node = BitcoinRPC.new
+ 	node.sendtoaddress(node.getnewaddress,1) 
+```
+and you should see printed on the screen the tx message receieved from Toshi:
+
+```Ruby
+2.0.0-p481 :007 > "new event [{\"subscription\":\"transactions\",\"data\":{\"hash\":....]"
+
+```
+
 ### Stop
 - hit **CTRL+D** in the bitcoind CMD prompt you were left with in the host terminal where you typed **make twoshi**
 - you can also type in a **host** terminal window
