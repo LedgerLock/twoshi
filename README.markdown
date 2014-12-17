@@ -76,7 +76,7 @@ See this [example implementation](/examples/toshi_websocket.rb) for subscribing 
 For example, in the twoshi root directory you can launch an IRB console and type:
 ```Ruby
 	require './examples/toshi_websocket.rb'
-  require './examples/bitcoin_rpc.rb'
+	require './examples/bitcoin_rpc.rb'
 	node = BitcoinRPC.new
  	node.sendtoaddress(node.getnewaddress,1) 
 ```
