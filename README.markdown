@@ -46,6 +46,7 @@ If you are wondering why we need to run console in the bitcoind container, the r
 	root@bitcoind:/# rt getpeerinfo
 	root@bitcoind:/# rt setgenerate true 101
 	root@bitcoind:/# rt getnewaddress
+	root@bitcoind:/# rt sendtoaddress $(rt getnewaddress) 1
 	...........
 ```
 Of course, this is not the way to do it, you want to control it programatically.
@@ -58,6 +59,8 @@ Of course, this is not the way to do it, you want to control it programatically.
 	node.sendtoaddress(node.getnewaddress,123.456)
 	........
 ```
+See this [example implementation](/examples/bitcoin_rpc.rb) for an RPC client that connects you directly to the bitcoind in twoshi.
+
 - use the toshi [api](https://toshi.io/docs/), for example, find the [balance in an address](https://toshi.io/docs/#get-address-balance)
 ```Batchfile
 	GET https://localhost:5000/api/<version>/addresses/<hash>
@@ -66,22 +69,7 @@ Of course, this is not the way to do it, you want to control it programatically.
 ```Batchfile
 	ws://localhost:5000
 ```
-[For example](https://github.com/faye/faye-websocket-ruby), subscribing to transactions:
-```Ruby
-	require 'faye/websocket'
-	require 'eventmachine'
-
-	EM.run {
-	  ws = Faye::WebSocket::Client.new('ws://localhost:5000')
-
-	  ws.on :open do |event|
-	    p [:open]
-	    ws.send('{"subscribe":"'+"transactions"+'"}')
-	  end
-
-	  .......
-	}
-```
+See this [example implementation](/examples/toshi_websocket.rb) for subscribing to transactions.
 
 ### Stop
 - hit **CTRL+D** in the bitcoind CMD prompt you were left with in the host terminal where you typed **make twoshi**
