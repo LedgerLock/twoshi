@@ -16,7 +16,7 @@ Inspired by
 	cd twoshi
 ```
 ### Launch 
-- launch the regtest two-node-network
+- launch the regtest two-node-network (OSX users: if the following 'make' command causes [this](http://stackoverflow.com/questions/25372781/docker-error-var-run-docker-sock-no-such-file-or-directory) error, add environment variables to sudo as explained [here](http://craiccomputing.blogspot.com/2010/10/setting-environment-variables-for-sudo.html).
 ```Batchfile
 	make twoshi
 ```
