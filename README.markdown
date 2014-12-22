@@ -6,8 +6,10 @@ Inspired by
 - [creating-your-own-experimental-bitcoin-network](http://geraldkaszuba.com/creating-your-own-experimental-bitcoin-network/)
 
 # How to use twoshi
+- For OSX see seperate section below.
+
 ### Docker
-- [Install Docker](https://docs.docker.com/installation/) (For OSX we recommend [these homebrew instructions](http://penandpants.com/2014/03/09/docker-via-homebrew/))
+- [Install Docker](https://docs.docker.com/installation/)
 
 ### Clone
 - clone this repo, including the toshi submodule which is on the docker branch until such time that my [pull request](https://github.com/coinbase/toshi/pull/131) is merged into coinbase/toshi
@@ -16,7 +18,7 @@ Inspired by
 	cd twoshi
 ```
 ### Launch 
-- launch the regtest two-node-network (OSX users: if the following 'make' command causes [this](http://stackoverflow.com/questions/25372781/docker-error-var-run-docker-sock-no-such-file-or-directory) error, add environment variables to sudo as explained [here](http://craiccomputing.blogspot.com/2010/10/setting-environment-variables-for-sudo.html).
+- launch the regtest two-node-network
 ```Batchfile
 	make twoshi
 ```
@@ -38,6 +40,12 @@ The first time you run this it will take a little while to build the docker imag
 	root@bitcoind:/#
 ```
 If you are wondering why we need to run console in the bitcoind container, the reason is the way [docker works](https://docs.docker.com/userguide/dockerizing/). We want to keep the bitcoind container running but Docker containers only run as long as the command we specify is active.
+
+### Differences for OSX
+Docker does not run natively on OSX. As a consequence, the following steps should be taken:
+- We recommend using homebrew / cask to install docker [as explained here](http://penandpants.com/2014/03/09/docker-via-homebrew/).
+- Docker runs in a VM in OSX via boot2docker which does not expect to be run via sudo. When attempting to launch twoshi, you may come by [this](http://stackoverflow.com/questions/25372781/docker-error-var-run-docker-sock-no-such-file-or-directory) error. You will need to make the docker environment variables (DOCKER_HOST, DOCKER_TLS_VERIFY, DOCKER_CERT_PATH) available to sudo as explained [here](http://craiccomputing.blogspot.com/2010/10/setting-environment-variables-for-sudo.html).
+- Instead of connecting to localhost:5000 you will need to connect to the VM running docker. The VM's IP address is defined by the DOCKER_HOST env variable. For instance if DOCKER_HOST=tcp://192.168.59.103:2376 then browse to 192.168.59.103:5000
 
 ### Control
 - The Bitcoind shell accepts the alias `rt` for `bitcoind -regtest` so you can use the [bitcoind api](https://bitcoin.org/en/developer-reference#bitcoin-core-apis), for example:
