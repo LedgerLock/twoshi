@@ -7,7 +7,7 @@ Inspired by
 
 # How to use twoshi
 ### Docker
-- [Install Docker](https://docs.docker.com/installation/)
+- [Install Docker](https://docs.docker.com/installation/) (For OSX we recommend [these homebrew instructions](http://penandpants.com/2014/03/09/docker-via-homebrew/))
 
 ### Clone
 - clone this repo, including the toshi submodule which is on the docker branch until such time that my [pull request](https://github.com/coinbase/toshi/pull/131) is merged into coinbase/toshi
