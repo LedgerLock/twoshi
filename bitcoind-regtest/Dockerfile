@@ -1,7 +1,7 @@
-FROM ubuntu:precise
+FROM ubuntu:trusty
 
 RUN apt-get -y update
-RUN apt-get install -y python-software-properties nano curl
+RUN apt-get install -y software-properties-common nano curl
 
 RUN add-apt-repository ppa:bitcoin/bitcoin
 RUN apt-get update
