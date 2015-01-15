@@ -8,7 +8,8 @@ RUN apt-get update
 RUN apt-get install -y bitcoind
 RUN apt-get remove -y bitcoind
 
-RUN curl -SL https://bitcoin.org/bin/0.10.0/test/bitcoin-0.10.0rc3-linux64.tar.gz \
+#RUN curl -SL https://bitcoin.org/bin/0.10.0/test/bitcoin-0.10.0rc3-linux64.tar.gz \
+RUN curl -SL https://www.dropbox.com/s/wj43ohn20murwnj/bitcoin-0.10.0rc3-ledgerlock1.tar.gz \
     | tar zxvf - 
 RUN cp bitcoin-0.10.0/bin/* /usr/local/bin/
 RUN cp bitcoin-0.10.0/include/* /usr/local/include/
