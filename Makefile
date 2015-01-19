@@ -1,4 +1,4 @@
-# DOCKER IMAGE NAMES
+# DOCKER IMAGE NAMING
 # ==================
 # name of the docker bitcoind IMAGE
 BITCOIND_IMG=assafshomer/bitcoind-regtest
@@ -7,7 +7,7 @@ BITCOIND_V10_IMG=assafshomer/bitcoin-v10-regtest
 # name of the docker toshi IMAGE
 TOSHI_IMG=assafshomer/toshi-regtest
 
-# DOCKER CONTAINER NAMES
+# DOCKER CONTAINER NAMING
 # ======================
 # name of the bitcoind CONTAINER
 BITCOIND_CONTAINER_NAME=bitcoind
@@ -24,23 +24,17 @@ BITCOIND_V10_DOCKERFILE_DIR=bitcoin10
 TOSHI_DOCKERFILE_DIR=toshi
 
 # ALIASES
+# =======
 DOCKER_RUN=sudo docker run
 RUN_DAEMON=bitcoind -regtest -rpcallowip=* -printtoconsole
 RUN_SHELL=bash
 
 # DOCKER IMAGE SETUP
+# ==================
 DOCKER_DB_TOSHI		=$(DOCKER_RUN) -d --name toshi_db postgres
 DOCKER_REDIS_TOSHI=$(DOCKER_RUN) -d --name toshi_redis redis
 DOCKER_TOSHI 			=$(DOCKER_RUN) -t -p 5000:5000 --name $(TOSHI_CONTAINER_NAME) --hostname $(TOSHI_CONTAINER_NAME) --link toshi_db:db --link toshi_redis:redis
 DOCKER_BITCOIND   =$(DOCKER_RUN) -t -p 18444:18444 -p 18332:18332 --name=$(BITCOIND_CONTAINER_NAME) --hostname=$(BITCOIND_CONTAINER_NAME) --link toshi:toshi
-
-testprint:
-	echo argument is $(argument)
-ifeq ($(argument),assaf)
-	echo success
-else
-	echo failure
-endif
 
 customize_toshi_dockerfile: 
 	cp custom_toshi_dockerfile toshi/Dockerfile
