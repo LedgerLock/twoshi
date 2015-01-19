@@ -59,7 +59,8 @@ Docker does not run natively on OSX. As a consequence, the following steps shoul
 - Instead of connecting to localhost:5000 you will need to connect to the VM running docker. The VM's IP address is defined by the DOCKER_HOST env variable. For instance if DOCKER_HOST=tcp://192.168.59.103:2376 then browse to 192.168.59.103:5000
 
 ### Control
-- The Bitcoind shell accepts the alias `rt` for `bitcoind -regtest` so you can use the [bitcoind api](https://bitcoin.org/en/developer-reference#bitcoin-core-apis), for example:
+#### Bitcoind node shell
+The Bitcoind shell accepts the alias `rt` for `bitcoind -regtest` so you can use the [bitcoind api](https://bitcoin.org/en/developer-reference#bitcoin-core-apis), for example:
 ```Batchfile
 	root@bitcoind:/# rt getinfo
 	root@bitcoind:/# rt getpeerinfo
@@ -70,7 +71,8 @@ Docker does not run natively on OSX. As a consequence, the following steps shoul
 ```
 Of course, this is not the way to do it, you want to control it programatically.
 
-- connect to the bitcoind node with RPC using a [bitcoin rpc client](https://en.bitcoin.it/wiki/API_reference_(JSON-RPC)#Ruby). You can use the [example implementation](/examples/bitcoin_rpc.rb) that connects you directly to the bitcoind in twoshi.
+#### Bitcoind RPC
+Connect to the bitcoind node with RPC using a [bitcoin rpc client](https://en.bitcoin.it/wiki/API_reference_(JSON-RPC)#Ruby). You can use the [example implementation](/examples/bitcoin_rpc.rb) that connects you directly to the bitcoind in twoshi.
 For example, in the twoshi root directory you can launch an IRB console and type
 
 ```Ruby
@@ -82,11 +84,26 @@ For example, in the twoshi root directory you can launch an IRB console and type
 	........
 ```
 
-- use the toshi [api](https://toshi.io/docs/), for example, find the [balance in an address](https://toshi.io/docs/#get-address-balance)
+#### Bitcoind [REST API](https://github.com/bitcoin/bitcoin/blob/0.10/doc/release-notes.md#rest-interface) (Version 10 only)
+- If you are using [bitcoind Version 10](# Bitcoind Version support), you can also take advantage of the new [REST capabilities of bitcoind](https://github.com/bitcoin/bitcoin/blob/0.10/doc/release-notes.md#rest-interface)
+```Ruby
+	require './examples/bitcoin_rpc.rb'
+	node = BitcoinRPC.new
+	resturl = 'http://localhost:18332/rest/'	
+	url = resturl +'block/'+node.getblock(node.getblockhash(node.getblockcount))['hash']+'.json'
+	data = Net::HTTP.get(URI(url))
+	json = JSON.parse(data)
+```
+and you should see the json data of the top block receieved from the bitcoind node.
+
+#### [Toshi REST API](https://toshi.io/docs/)
+Use the toshi [api](https://toshi.io/docs/), for example, find the [balance in an address](https://toshi.io/docs/#get-address-balance)
 ```Batchfile
 	GET https://localhost:5000/api/<version>/addresses/<hash>
 ```
-- subscribe to toshi transactions and blocks [websocket notifications](https://toshi.io/docs/#websockets) with the following connection URL
+
+#### [Toshi WebSocket](https://toshi.io/docs/#websockets)
+Subscribe to toshi transactions and blocks [websocket notifications](https://toshi.io/docs/#websockets) with the following connection URL
 ```Batchfile
 	ws://localhost:5000
 ```
@@ -101,8 +118,8 @@ For example, in the twoshi root directory you can launch an IRB console and type
 ```
 and you should see printed on the screen the tx message receieved from Toshi:
 
-```Ruby
-2.0.0-p481 :007 > "new event [{\"subscription\":\"transactions\",\"data\":{\"hash\":....]"
+```Batchfile
+	2.0.0-p481 :007 > "new event [{\"subscription\":\"transactions\",\"data\":{\"hash\":....]"
 
 ```
 
