@@ -31,12 +31,12 @@ which will first clear everything up and then launch twoshi
 The first time you run this it will take a little while to build the docker images. After that it will be very fast.
 
 ### Bitcoind Version support
-The bitcoind node can either run with the latest version supported by [ppa bitcoin:bitcoin](https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin), which is currently **Version 0.9.4** or use the new [bitcoin core version 100](https://github.com/bitcoin/bitcoin/blob/0.10/doc/release-notes.md)(more specifically bitcoin-0.10.0rc3) by specifying
-#### Version 9
+The bitcoind node can either run with the latest version supported by [ppa bitcoin:bitcoin](https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin), currently on **Version 0.9.4** or use the new [version 10](https://github.com/bitcoin/bitcoin/blob/0.10/doc/release-notes.md) (more specifically bitcoin-0.10.0rc3)
+- Version 9
 <pre>
 	<b>make twoshi</b>(_clean)
 </pre>
-#### Version 10
+- Version 10
 <pre>
 	<b>make twoshi</b>(_clean) <b>VERSION=10</b>
 </pre>
