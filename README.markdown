@@ -85,7 +85,9 @@ For example, in the twoshi root directory you can launch an IRB console and type
 ```
 
 #### Bitcoind [REST API](https://github.com/bitcoin/bitcoin/blob/0.10/doc/release-notes.md#rest-interface) (Version 10 only)
-- If you are using [bitcoind Version 10](# Bitcoind Version support), you can also take advantage of the new [REST capabilities of bitcoind](https://github.com/bitcoin/bitcoin/blob/0.10/doc/release-notes.md#rest-interface)
+- If you are using [bitcoind Version 10](# Bitcoind Version support), you can also take advantage of the new [REST capabilities of bitcoind](https://github.com/bitcoin/bitcoin/blob/0.10/doc/release-notes.md#rest-interface). 
+For example, here is how we can get json data about the top block:
+
 ```Ruby
 	require './examples/bitcoin_rpc.rb'
 	node = BitcoinRPC.new
