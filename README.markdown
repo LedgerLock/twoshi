@@ -30,17 +30,6 @@ which will first clear everything up and then launch twoshi
 
 The first time you run this it will take a little while to build the docker images. After that it will be very fast.
 
-### Bitcoind Version support
-The bitcoind node can either run with the latest version supported by [ppa bitcoin:bitcoin](https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin), currently on **Version 0.9.4** or use the new [version 10](https://github.com/bitcoin/bitcoin/blob/0.10/doc/release-notes.md) (more specifically bitcoin-0.10.0rc3)
-- Version 9
-<pre>
-	<b>make twoshi</b>(_clean)
-</pre>
-- Version 10
-<pre>
-	<b>make twoshi</b>(_clean) <b>VERSION=10</b>
-</pre>
-
 - The Toshi docker container is running in the background (daemonized)
 - Visit localhost:5000, you should see the toshi client with one node (the bitcoind client) connected to it.
 
@@ -51,6 +40,17 @@ The bitcoind node can either run with the latest version supported by [ppa bitco
 	root@bitcoind:/#
 ```
 If you are wondering why we need to run console in the bitcoind container, the reason is the way [docker works](https://docs.docker.com/userguide/dockerizing/). We want to keep the bitcoind container running but Docker containers only run as long as the command we specify is active.
+
+### Bitcoind Version support
+The bitcoind node can either run with the latest version supported by [ppa bitcoin:bitcoin](https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin), currently on **Version 0.9.4** or use the new [version 10](https://github.com/bitcoin/bitcoin/blob/0.10/doc/release-notes.md) (more specifically bitcoin-0.10.0rc3)
+- Version 9
+<pre>
+	<b>make twoshi</b>(_clean)
+</pre>
+- Version 10
+<pre>
+	<b>make twoshi</b>(_clean) <b>VERSION=10</b>
+</pre>
 
 ### Differences for OSX
 Docker does not run natively on OSX. As a consequence, the following steps should be taken:
