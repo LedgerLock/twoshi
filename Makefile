@@ -1,29 +1,57 @@
-# name of the docker bitcoind image
+# DOCKER IMAGE NAMES
+# ==================
+# name of the docker bitcoind IMAGE
 BITCOIND_IMG=assafshomer/bitcoind-regtest
-# name of the docker toshi image
+# name of the docker bitcoind - v10 IMAGE
+BITCOIND_V10_IMG=assafshomer/bitcoin-v10-regtest
+# name of the docker toshi IMAGE
 TOSHI_IMG=assafshomer/toshi-regtest
-# directory of bitcoind dockerfile
+
+# DOCKER CONTAINER NAMES
+# ======================
+# name of the bitcoind CONTAINER
+BITCOIND_CONTAINER_NAME=bitcoind
+# name of the toshi CONTAINER
+TOSHI_CONTAINER_NAME=toshi
+
+# DOCKERFILE DIRECTORY LOCATIONS
+# ==============================
+# DIRECTORY of bitcoind dockerfile
 BITCOIND_DOCKERFILE_DIR=bitcoind
-# directory of toshi dockerfile
+# DIRECTORY of bitcoind - v10 dockerfile
+BITCOIND_V10_DOCKERFILE_DIR=bitcoin10
+# DIRECTORY of toshi dockerfile
 TOSHI_DOCKERFILE_DIR=toshi
 
-# useful aliases
+# ALIASES
 DOCKER_RUN=sudo docker run
 RUN_DAEMON=bitcoind -regtest -rpcallowip=* -printtoconsole
 RUN_SHELL=bash
 
-# setup docker images
+# DOCKER IMAGE SETUP
 DOCKER_DB_TOSHI		=$(DOCKER_RUN) -d --name toshi_db postgres
 DOCKER_REDIS_TOSHI=$(DOCKER_RUN) -d --name toshi_redis redis
-DOCKER_TOSHI 			=$(DOCKER_RUN) -t -p 5000:5000 --name toshi --hostname toshi --link toshi_db:db --link toshi_redis:redis
-DOCKER_BITCOIND   =$(DOCKER_RUN) -t -p 18444:18444 -p 18332:18332 --name=bitcoind --hostname=bitcoind --link toshi:toshi
+DOCKER_TOSHI 			=$(DOCKER_RUN) -t -p 5000:5000 --name $(TOSHI_CONTAINER_NAME) --hostname $(TOSHI_CONTAINER_NAME) --link toshi_db:db --link toshi_redis:redis
+DOCKER_BITCOIND   =$(DOCKER_RUN) -t -p 18444:18444 -p 18332:18332 --name=$(BITCOIND_CONTAINER_NAME) --hostname=$(BITCOIND_CONTAINER_NAME) --link toshi:toshi
+
+testprint:
+	echo argument is $(argument)
+ifeq ($(argument),assaf)
+	echo success
+else
+	echo failure
+endif
 
 customize_toshi_dockerfile: 
 	cp custom_toshi_dockerfile toshi/Dockerfile
 	cp scripts/toshi_launch.sh toshi/
 
 build_bitcoind:
+ifeq ($(VERSION),10)
+	sudo docker build -t=$(BITCOIND_V10_IMG) $(BITCOIND_V10_DOCKERFILE_DIR)
+else
 	sudo docker build -t=$(BITCOIND_IMG) $(BITCOIND_DOCKERFILE_DIR)
+endif	
 
 build_toshi: customize_toshi_dockerfile
 	sudo docker build -t=$(TOSHI_IMG) $(TOSHI_DOCKERFILE_DIR)
@@ -31,10 +59,10 @@ build_toshi: customize_toshi_dockerfile
 build_regtest: build_toshi build_bitcoind
 
 rm_bitcoind:
-	-sudo docker rm -f bitcoind	
+	-sudo docker rm -f $(BITCOIND_CONTAINER_NAME)	
 
 rm_toshi:
-	-sudo docker rm -f toshi
+	-sudo docker rm -f $(TOSHI_CONTAINER_NAME)
 
 rm_toshi_redis:
 	-sudo docker rm -f toshi_redis
@@ -57,7 +85,11 @@ toshi_daemon: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_r
 	sudo docker start toshi
 
 bitcoind_shell: rm_bitcoind build_bitcoind
+ifeq ($(VERSION),10)
+	$(DOCKER_BITCOIND) -i $(BITCOIND_V10_IMG) $(RUN_SHELL)
+else
 	$(DOCKER_BITCOIND) -i $(BITCOIND_IMG) $(RUN_SHELL)
+endif	
 
 bitcoind_daemon: rm_bitcoind
 	$(DOCKER_BITCOIND) -d=true $(BITCOIND_IMG) /bin/bash bitcoind_launch.sh
