@@ -7,17 +7,16 @@ BITCOIND_DOCKERFILE_DIR=bitcoind
 # directory of toshi dockerfile
 TOSHI_DOCKERFILE_DIR=toshi
 
+# useful aliases
 DOCKER_RUN=sudo docker run
+RUN_DAEMON=bitcoind -regtest -rpcallowip=* -printtoconsole
+RUN_SHELL=bash
 
-
+# setup docker images
 DOCKER_DB_TOSHI		=$(DOCKER_RUN) -d --name toshi_db postgres
 DOCKER_REDIS_TOSHI=$(DOCKER_RUN) -d --name toshi_redis redis
 DOCKER_TOSHI 			=$(DOCKER_RUN) -t -p 5000:5000 --name toshi --hostname toshi --link toshi_db:db --link toshi_redis:redis
 DOCKER_BITCOIND   =$(DOCKER_RUN) -t -p 18444:18444 -p 18332:18332 --name=bitcoind --hostname=bitcoind --link toshi:toshi
-
-RUN_DAEMON=bitcoind -regtest -rpcallowip=* -printtoconsole
-RUN_SHELL=bash
-
 
 customize_toshi_dockerfile: 
 	cp custom_toshi_dockerfile toshi/Dockerfile
