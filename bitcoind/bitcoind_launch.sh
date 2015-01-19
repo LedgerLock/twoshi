@@ -7,7 +7,7 @@
 # Short-Description: Start daemon at boot time
 # Description:       Enable service provided by daemon.
 ### END INIT INFO
-echo "this is bitcoind launch"
+echo "bitcoind launching"
 echo "exporting env vars"
 export tmp=${TOSHI_PORT/tcp:\/\//}
 export TOSHI_IP=${tmp/:*/}
