@@ -3,6 +3,8 @@ FROM litaio/ruby:2.1.5
 
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN apt-get update
+
 # Install dependencies
 RUN apt-get -q -y install libpq-dev git
 RUN gem install bundler
