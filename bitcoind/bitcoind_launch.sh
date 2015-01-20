@@ -12,6 +12,11 @@ echo "exporting env vars"
 export tmp=${TOSHI_PORT/tcp:\/\//}
 export TOSHI_IP=${tmp/:*/}
 export DELAY=${DELAY}
+export DELAY=${DELAY}
+if [ -z $DELAY ] 
+	then
+		export DELAY=5
+fi
 echo "launching bitcoind daemon in regtest mode"
 bitcoind -regtest -daemon -rpcallowip=* -printtoconsole
 # increase the number of seconds to more than 5 if bitcoind didn't manage to connect to toshi
