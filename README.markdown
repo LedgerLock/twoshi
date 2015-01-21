@@ -66,7 +66,7 @@ An easier way to launch Twoshi is to use
 ```
 and add a **.env** file at the root of Twoshi.
 If no environment variables are specified, the defaults are:
-* bitciond version 90300
+* bitcoind version 90300
 * not running cleanup (i.e. running `make twoshi`, not `make twoshi_clean`)
 * bitcoind waits for 5 seconds for toshi to get ready before attempting to connect
 
