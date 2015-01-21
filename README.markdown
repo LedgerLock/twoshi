@@ -17,7 +17,8 @@ Inspired by
 	git clone --recursive git@github.com:LedgerLock/twoshi.git
 	cd twoshi
 ```
-### Launch 
+
+### Launch
 - launch the regtest two-node-network
 ```Batchfile
 	make twoshi
@@ -57,6 +58,24 @@ Docker does not run natively on OSX. As a consequence, the following steps shoul
 - We recommend using homebrew / cask to install docker [as explained here](http://penandpants.com/2014/03/09/docker-via-homebrew/).
 - Docker runs in a VM in OSX via boot2docker which does not expect to be run via sudo. When attempting to launch twoshi, you may come by [this](http://stackoverflow.com/questions/25372781/docker-error-var-run-docker-sock-no-such-file-or-directory) error. You will need to make the docker environment variables (DOCKER_HOST, DOCKER_TLS_VERIFY, DOCKER_CERT_PATH) available to sudo as explained [here](http://craiccomputing.blogspot.com/2010/10/setting-environment-variables-for-sudo.html).
 - Instead of connecting to localhost:5000 you will need to connect to the VM running docker. The VM's IP address is defined by the DOCKER_HOST env variable. For instance if DOCKER_HOST=tcp://192.168.59.103:2376 then browse to 192.168.59.103:5000
+
+### Environment Variables and Foreman
+An easier way to launch Twoshi is to use 
+```Batchfile
+	foreman start
+```
+and add a **.env** file at the root of Twoshi.
+If no environment variables are specified, the defaults are:
+* bitciond version 90300
+* not running cleanup (i.e. running `make twoshi`, not `make twoshi_clean`)
+* bitcoind waits for 5 seconds for toshi to get ready before attempting to connect
+You can change that by adding a .env file. For example, if you want to run bitcoind version 10, with a 25 seconds delay and cleaning up all docker containers, add the following to your .env file:
+
+```Batchfile
+	DELAY=25
+	VERSION=10
+	CLEAN=TRUE
+```
 
 ### Control
 #### Bitcoind node shell

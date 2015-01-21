@@ -100,6 +100,13 @@ cleanup:
 
 twoshi_clean: cleanup twoshi
 
+run:
+ifeq ($(CLEAN),TRUE)
+	make twoshi_clean
+else
+	make twoshi
+endif		
+
 
 # DOCKER_ALICE=$(DOCKER_RUN) -t -p 20444:18444 -p 20332:18332 --name=alice --hostname=alice
 # DOCKER_BOB  =$(DOCKER_RUN) -t -p 19444:18444 -p 19332:18332 --name=bob --hostname=bob
