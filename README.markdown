@@ -69,7 +69,8 @@ If no environment variables are specified, the defaults are:
 * bitciond version 90300
 * not running cleanup (i.e. running `make twoshi`, not `make twoshi_clean`)
 * bitcoind waits for 5 seconds for toshi to get ready before attempting to connect
-You can change that by adding a .env file. For example, if you want to run bitcoind version 10, with a 25 seconds delay and cleaning up all docker containers, add the following to your .env file:
+
+You can change that by adding a .env file. [For example](/examples/.env.example), if you want to run bitcoind version 10, with a 25 seconds delay and cleaning up all docker containers, add the following to your .env file:
 
 ```Batchfile
 	DELAY=25
