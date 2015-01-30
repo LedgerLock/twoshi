@@ -10,6 +10,7 @@ Inspired by
 
 ### Docker
 - [Install Docker](https://docs.docker.com/installation/)
+- On Ubuntu, you need to [edit /etc/default/docker](https://github.com/docker/fig/issues/88), followed by `export DOCKER_HOST=tcp://localhost:4243` 
 
 ### Clone
 - clone this repo, including the toshi submodule which is on the docker branch until such time that my [pull request](https://github.com/coinbase/toshi/pull/131) is merged into coinbase/toshi
@@ -56,7 +57,6 @@ The bitcoind node can either run with the latest version supported by [ppa bitco
 ### Differences for OSX
 Docker does not run natively on OSX. As a consequence, the following steps should be taken:
 - We recommend using homebrew / cask to install docker [as explained here](http://penandpants.com/2014/03/09/docker-via-homebrew/).
-- Docker runs in a VM in OSX via boot2docker which does not expect to be run via sudo. When attempting to launch twoshi, you may come by [this](http://stackoverflow.com/questions/25372781/docker-error-var-run-docker-sock-no-such-file-or-directory) error. You will need to make the docker environment variables (DOCKER_HOST, DOCKER_TLS_VERIFY, DOCKER_CERT_PATH) available to sudo as explained [here](http://craiccomputing.blogspot.com/2010/10/setting-environment-variables-for-sudo.html).
 - Instead of connecting to localhost:5000 you will need to connect to the VM running docker. The VM's IP address is defined by the DOCKER_HOST env variable. For instance if DOCKER_HOST=tcp://192.168.59.103:2376 then browse to 192.168.59.103:5000
 
 ### Environment Variables and Foreman
@@ -149,7 +149,7 @@ and you should see printed on the screen the tx message receieved from Toshi:
 - hit **CTRL+D** in the bitcoind CMD prompt you were left with in the host terminal where you typed **make twoshi**
 - you can also type in a **host** terminal window
 ```Batchfile
-	sudo docker stop bitcoind
+	docker stop bitcoind
 ```
 This stops the bitcoind daemon.
 - if you visit localhost:5000 you can see that the toshi client is now offline with 0 peers connected to it
@@ -160,7 +160,7 @@ This stops the bitcoind daemon.
 
 - restart the stopped bitcoind container
 ```Batchfile
-	sudo docker restart bitcoind	
+	docker restart bitcoind	
 ```
 At the moment, when you do this a new bitcoind damon is launched and automatically connects to toshi, and as a consequence toshi will **register a new peer** (not sure this matters).
 
@@ -168,13 +168,13 @@ At the moment, when you do this a new bitcoind damon is launched and automatical
 
 - You can attach to the container's terminal
 ```Batchfile
-	sudo docker attach bitcoind
+	docker attach bitcoind
 ```
 
 ### Cleanup
 - The first time you do this you need to give the scripts exec permissions
 ```Batchfile
-	sudo chmod a+wx scripts/cleardocker*.sh
+	chmod a+wx scripts/cleardocker*.sh
 ```
 - If you are **NOT** worried about other docker containers running on your host 
 ```Batchfile

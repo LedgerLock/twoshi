@@ -25,7 +25,7 @@ TOSHI_DOCKERFILE_DIR=toshi
 
 # ALIASES
 # =======
-DOCKER_RUN=sudo docker run
+DOCKER_RUN=docker run
 RUN_DAEMON=bitcoind -regtest -rpcallowip=* -printtoconsole
 RUN_SHELL=bash
 
@@ -42,30 +42,30 @@ customize_toshi_dockerfile:
 
 build_bitcoind:
 ifeq ($(VERSION),10)
-	sudo docker build -t=$(BITCOIND_V10_IMG) $(BITCOIND_V10_DOCKERFILE_DIR)
+	docker build -t=$(BITCOIND_V10_IMG) $(BITCOIND_V10_DOCKERFILE_DIR)
 else
-	sudo docker build -t=$(BITCOIND_IMG) $(BITCOIND_DOCKERFILE_DIR)
+	docker build -t=$(BITCOIND_IMG) $(BITCOIND_DOCKERFILE_DIR)
 endif	
 
 build_toshi: customize_toshi_dockerfile
-	sudo docker build -t=$(TOSHI_IMG) $(TOSHI_DOCKERFILE_DIR)
+	docker build -t=$(TOSHI_IMG) $(TOSHI_DOCKERFILE_DIR)
 	
 build_regtest: build_toshi build_bitcoind
 
 rm_bitcoind:
-	-sudo docker rm -f $(BITCOIND_CONTAINER_NAME)	
+	-docker rm -f $(BITCOIND_CONTAINER_NAME)	
 
 rm_toshi:
-	-sudo docker rm -f $(TOSHI_CONTAINER_NAME)
+	-docker rm -f $(TOSHI_CONTAINER_NAME)
 
 rm_toshi_redis:
-	-sudo docker rm -f toshi_redis
+	-docker rm -f toshi_redis
 
 launch_toshi_redis: 
 	$(DOCKER_REDIS_TOSHI)
 
 rm_toshi_db:
-	-sudo docker rm -f toshi_db
+	-docker rm -f toshi_db
 
 launch_toshi_db: 
 	$(DOCKER_DB_TOSHI)
@@ -76,7 +76,7 @@ toshi_shell: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_re
 toshi_daemon: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
 	$(DOCKER_TOSHI) -d=true $(TOSHI_IMG) /bin/bash toshi_launch.sh
 	sleep "5"
-	sudo docker start toshi
+	docker start toshi
 
 bitcoind_shell: rm_bitcoind build_bitcoind
 ifeq ($(VERSION),10)
@@ -88,15 +88,15 @@ endif
 bitcoind_daemon: rm_bitcoind
 	$(DOCKER_BITCOIND) -d=true $(BITCOIND_IMG) /bin/bash bitcoind_launch.sh
 	sleep "5"
-	sudo docker start bitcoind
-	sudo docker attach bitcoind
+	docker start bitcoind
+	docker attach bitcoind
 
 regtest_daemon: build_regtest toshi_daemon bitcoind_daemon
 
 twoshi: build_regtest toshi_daemon bitcoind_shell
 
 cleanup:
-	sudo ./scripts/cleardocker.sh
+	./scripts/cleardocker.sh
 
 twoshi_clean: cleanup twoshi
 
@@ -112,10 +112,10 @@ endif
 # DOCKER_BOB  =$(DOCKER_RUN) -t -p 19444:18444 -p 19332:18332 --name=bob --hostname=bob
 
 # rm_alice:
-# 	-sudo docker rm -f alice
+# 	-docker rm -f alice
 
 # rm_bob:
-# 	-sudo docker rm -f bob
+# 	-docker rm -f bob
 
 # alice_daemon: rm_alice
 # 	$(DOCKER_ALICE) -d=true $(BITCOIND_IMG) $(RUN_DAEMON)
