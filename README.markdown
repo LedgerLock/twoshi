@@ -10,7 +10,18 @@ Inspired by
 
 ### Docker
 - [Install Docker](https://docs.docker.com/installation/)
-- On Ubuntu, you need to [edit /etc/default/docker](https://github.com/docker/fig/issues/88), followed by `export DOCKER_HOST=tcp://localhost:4243` 
+- On Ubuntu, you need to [edit /etc/default/docker](https://github.com/docker/fig/issues/88):
+```
+1. Change the DOCKER_OPTS in /etc/default/docker to:
+DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"
+
+2. Restart docker
+sudo restart docker
+sudo restart docker.io    (on ubuntu 14.04)
+
+3. Set DOCKER_HOST (.bashrc)
+export DOCKER_HOST=tcp://localhost:4243
+```
 
 ### Clone
 - clone this repo, including the toshi submodule which is on the docker branch until such time that my [pull request](https://github.com/coinbase/toshi/pull/131) is merged into coinbase/toshi
