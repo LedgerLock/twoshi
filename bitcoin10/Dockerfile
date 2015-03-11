@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y bitcoind
 RUN apt-get remove -y bitcoind
 
-RUN curl -SL https://bitcoin.org/bin/0.10.0/test/bitcoin-0.10.0rc3-linux64.tar.gz \
+RUN curl -SL https://bitcoin.org/bin/bitcoin-core-0.10.0/bitcoin-0.10.0-linux64.tar.gz \
     | tar zxvf - 
 RUN cp bitcoin-0.10.0/bin/* /usr/local/bin/
 RUN cp bitcoin-0.10.0/include/* /usr/local/include/
