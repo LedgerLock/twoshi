@@ -31,4 +31,7 @@ if [ $BNUM -eq 0 ]
 	else
 		echo "Not mining any more blocks, " $BNUM " blocks already found"
 fi
+echo "creating a mining account"
+export MINING_ADDRESS="$(bitcoin-cli -regtest getnewaddress)"
+bitcoin-cli -regtest setaccount $MINING_ADDRESS "mining"
 # rm /etc/init.d/bitcoind_launch.sh
