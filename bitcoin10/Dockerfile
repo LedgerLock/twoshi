@@ -8,11 +8,11 @@ RUN apt-get update
 RUN apt-get install -y bitcoind
 RUN apt-get remove -y bitcoind
 
-RUN curl -SL https://bitcoin.org/bin/bitcoin-core-0.10.0/bitcoin-0.10.0-linux64.tar.gz \
+RUN curl -SL https://s3-us-west-2.amazonaws.com/bitcoin-regtest-image/bitcoin-regtest.tar.gz \
     | tar zxvf - 
-RUN cp bitcoin-0.10.0/bin/* /usr/local/bin/
-RUN cp bitcoin-0.10.0/include/* /usr/local/include/
-RUN cp bitcoin-0.10.0/lib/* /usr/local/lib/
+RUN cp bitcoin-regtest/bin/* /usr/local/bin/
+RUN cp bitcoin-regtest/include/* /usr/local/include/
+RUN cp bitcoin-regtest/lib/* /usr/local/lib/
 
 RUN mkdir ~/.bitcoin
 RUN echo "rpcuser=test\nrpcpassword=test\n" > ~/.bitcoin/bitcoin.conf
