@@ -34,4 +34,5 @@ fi
 echo "creating a mining account"
 export MINING_ADDRESS="$(bitcoin-cli -regtest getnewaddress)"
 bitcoin-cli -regtest setaccount $MINING_ADDRESS "mining"
+bitcoin-cli -regtest settxfee 0.01
 # rm /etc/init.d/bitcoind_launch.sh
