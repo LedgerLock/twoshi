@@ -7,6 +7,11 @@ BITCOIND_V10_IMG=assafshomer/bitcoin-v10-regtest
 # name of the docker toshi IMAGE
 TOSHI_IMG=assafshomer/toshi-regtest
 
+# DEFAULT ARGUMENTS
+# ================
+DEFAULT_VERSION=10
+VERSION ?= $(DEFAULT_VERSION)
+
 # DOCKER CONTAINER NAMING
 # ======================
 # name of the bitcoind CONTAINER
