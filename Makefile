@@ -7,6 +7,11 @@ BITCOIND_V10_IMG=assafshomer/bitcoin-v10-regtest
 # name of the docker toshi IMAGE
 TOSHI_IMG=assafshomer/toshi-regtest
 
+# DEFAULT ARGUMENTS
+# ================
+DEFAULT_VERSION=10
+VERSION ?= $(DEFAULT_VERSION)
+
 # DOCKER CONTAINER NAMING
 # ======================
 # name of the bitcoind CONTAINER
@@ -78,7 +83,7 @@ toshi_daemon: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_r
 	sleep "5"
 	docker start toshi
 
-bitcoind_shell: rm_bitcoind build_bitcoind
+bitcoind_shell: rm_bitcoind
 ifeq ($(VERSION),10)
 	$(DOCKER_BITCOIND) -i $(BITCOIND_V10_IMG) $(RUN_SHELL)
 else
@@ -86,14 +91,17 @@ else
 endif	
 
 bitcoind_daemon: rm_bitcoind
-	$(DOCKER_BITCOIND) -d=true $(BITCOIND_IMG) /bin/bash bitcoind_launch.sh
+ifeq ($(VERSION),10)
+	$(DOCKER_BITCOIND) -d $(BITCOIND_V10_IMG) $(RUN_SHELL)
+else
+	$(DOCKER_BITCOIND) -d $(BITCOIND_IMG) $(RUN_SHELL)
+endif	
 	sleep "5"
 	docker start bitcoind
-	docker attach bitcoind
 
 regtest_daemon: build_regtest toshi_daemon bitcoind_daemon
 
-twoshi: build_regtest toshi_daemon bitcoind_shell
+twoshi: build_regtest toshi_daemon bitcoind_daemon
 
 cleanup:
 	./scripts/cleardocker.sh
@@ -106,25 +114,3 @@ ifeq ($(CLEAN),TRUE)
 else
 	make twoshi
 endif		
-
-
-# DOCKER_ALICE=$(DOCKER_RUN) -t -p 20444:18444 -p 20332:18332 --name=alice --hostname=alice
-# DOCKER_BOB  =$(DOCKER_RUN) -t -p 19444:18444 -p 19332:18332 --name=bob --hostname=bob
-
-# rm_alice:
-# 	-docker rm -f alice
-
-# rm_bob:
-# 	-docker rm -f bob
-
-# alice_daemon: rm_alice
-# 	$(DOCKER_ALICE) -d=true $(BITCOIND_IMG) $(RUN_DAEMON)
-
-# alice_shell: rm_alice
-# 	$(DOCKER_ALICE) -i $(BITCOIND_IMG) $(RUN_SHELL)
-
-# bob_daemon: rm_bob
-# 	$(DOCKER_BOB) -d=true $(BITCOIND_IMG) $(RUN_DAEMON)
-
-# bob_shell: rm_bob
-# 	$(DOCKER_BOB) -i $(BITCOIND_IMG) $(RUN_SHELL)
