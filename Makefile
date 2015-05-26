@@ -75,7 +75,7 @@ toshi_shell: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_re
 
 toshi_daemon: rm_toshi rm_toshi_redis rm_toshi_db launch_toshi_db launch_toshi_redis
 	$(DOCKER_TOSHI) -d=true $(TOSHI_IMG) /bin/bash toshi_launch.sh
-	sleep "5"
+	sleep $(DELAY)
 	docker start toshi
 
 bitcoind_shell: rm_bitcoind build_bitcoind
@@ -87,7 +87,7 @@ endif
 
 bitcoind_daemon: rm_bitcoind
 	$(DOCKER_BITCOIND) -d=true $(BITCOIND_IMG) /bin/bash bitcoind_launch.sh
-	sleep "5"
+	sleep $(DELAY)
 	docker start bitcoind
 	docker attach bitcoind
 
